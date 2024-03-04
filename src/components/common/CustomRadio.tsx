@@ -1,10 +1,10 @@
 type CustomRadioProps = {
-  value: string;
-  checked: boolean;
-  handleChange: () => void;
-  labelText: string;
-  todosNumber: number;
-};
+  value: string
+  checked: boolean
+  handleChange: () => void
+  labelText: string
+  todosNumber: number
+}
 
 const CustomRadio = ({
   checked,
@@ -29,7 +29,7 @@ const CustomRadio = ({
       </label>
       <span className="text-orange-600 font-bold text-xs">({todosNumber})</span>
     </div>
-  );
-};
+  )
+}
 
-export default CustomRadio;
+export default CustomRadio

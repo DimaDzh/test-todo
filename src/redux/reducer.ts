@@ -1,4 +1,4 @@
-import { Reducer } from "redux";
+import { Reducer } from "redux"
 import {
   ADD_TODO,
   TOGGLE_TODO,
@@ -7,21 +7,21 @@ import {
   MARK_INCOMPLETE,
   FILTER_TODOS,
   TodoAction,
-} from "./actionTypes";
+} from "./actionTypes"
 
 const initialState: TodoState = {
   todos: [],
   filter: "ALL",
   completedCount: 0,
   incompleteCount: 0,
-};
+}
 
 const todoReducer: Reducer<TodoState, TodoAction> = (
   state = initialState,
   action
 ) => {
-  let updatedTodos;
-  let removedTodo;
+  let updatedTodos
+  let removedTodo
   switch (action.type) {
     case ADD_TODO:
       return {
@@ -31,23 +31,23 @@ const todoReducer: Reducer<TodoState, TodoAction> = (
           { text: action.payload.text, completed: false },
         ],
         incompleteCount: state.incompleteCount + 1,
-      };
+      }
 
     case TOGGLE_TODO:
       updatedTodos = state.todos.map((todo, index) =>
         index === action.payload.id
           ? { ...todo, completed: !todo.completed }
           : todo
-      );
+      )
       return {
         ...state,
         todos: updatedTodos,
         completedCount: updatedTodos.filter((todo) => todo.completed).length,
         incompleteCount: updatedTodos.filter((todo) => !todo.completed).length,
-      };
+      }
 
     case REMOVE_TODO:
-      removedTodo = state.todos[action.payload.id];
+      removedTodo = state.todos[action.payload.id]
       return {
         ...state,
         todos: state.todos.filter((_, index) => index !== action.payload.id),
@@ -57,7 +57,7 @@ const todoReducer: Reducer<TodoState, TodoAction> = (
         completedCount: removedTodo.completed
           ? state.completedCount - 1
           : state.completedCount,
-      };
+      }
 
     case MARK_COMPLETED:
       return {
@@ -67,7 +67,7 @@ const todoReducer: Reducer<TodoState, TodoAction> = (
         ),
         completedCount: state.completedCount + 1,
         incompleteCount: state.incompleteCount - 1,
-      };
+      }
 
     case MARK_INCOMPLETE:
       return {
@@ -77,29 +77,29 @@ const todoReducer: Reducer<TodoState, TodoAction> = (
         ),
         completedCount: state.completedCount - 1,
         incompleteCount: state.incompleteCount + 1,
-      };
+      }
 
     case FILTER_TODOS:
       return {
         ...state,
         filter: action.payload.filter,
-      };
+      }
 
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default todoReducer;
+export default todoReducer
 
 export interface Todo {
-  text: string;
-  completed: boolean;
+  text: string
+  completed: boolean
 }
 
 export interface TodoState {
-  todos: Todo[];
-  filter: string;
-  completedCount: number;
-  incompleteCount: number;
+  todos: Todo[]
+  filter: string
+  completedCount: number
+  incompleteCount: number
 }

@@ -1,32 +1,31 @@
-import { FC, useState } from "react";
-import { useDispatch } from "react-redux";
-import TodoList from "./TodoList";
-import FilterButtons from "./FilterButtons";
-import { BsPlus } from "react-icons/bs";
-import { addTodo } from "../redux/actions";
+import { FC, useState } from "react"
+import { useDispatch } from "react-redux"
+import TodoList from "./TodoList"
+import FilterButtons from "./FilterButtons"
+import { BsPlus } from "react-icons/bs"
+import { addTodo } from "../redux/actions"
 
 type TodoListProps = {
-  validTotoLength: number;
-};
+  validTotoLength: number
+}
 
 const TodoSection: FC<TodoListProps> = ({ validTotoLength }) => {
-  // const todos = useSelector((state: TodoState) => state.todos);
-  // const filter = useSelector((state: TodoState) => state.filter);
-  const dispatch = useDispatch();
-  const [newTodoText, setNewTodoText] = useState("");
-  const textLength = newTodoText.concat().split("").length;
-  const isValidTodoText = textLength > validTotoLength;
+ 
+  const dispatch = useDispatch()
+  const [newTodoText, setNewTodoText] = useState("")
+  const textLength = newTodoText.concat().split("").length
+  const isValidTodoText = textLength > validTotoLength
 
   const handleAddTodo = (text: string): void => {
-    dispatch(addTodo(text));
-  };
+    dispatch(addTodo(text))
+  }
 
   const handleAddTodoClick = (): void => {
     if (newTodoText.trim() !== "" && isValidTodoText) {
-      handleAddTodo(newTodoText.trim());
-      setNewTodoText("");
+      handleAddTodo(newTodoText.trim())
+      setNewTodoText("")
     }
-  };
+  }
 
   return (
     <div className="max-w-4xl mx-auto sm:mt-8 p-4 bg-gray-100 rounded container">
@@ -43,14 +42,14 @@ const TodoSection: FC<TodoListProps> = ({ validTotoLength }) => {
             value={newTodoText}
             onChange={(e) => setNewTodoText(e.target.value)}
           />
-          {!isValidTodoText && (
+          {!isValidTodoText && 
             <span className="text-xs absolute bottom-0 translate-y-full px-2 pt-1 text italic">
               Todo text length must be longer than :{" "}
               <span className="font-bold underline text-red-500">
                 {validTotoLength}
               </span>
             </span>
-          )}
+          }
         </div>
         <button
           className={`ml-4 p-2  text-white rounded  focus:outline-none ${
@@ -71,7 +70,7 @@ const TodoSection: FC<TodoListProps> = ({ validTotoLength }) => {
 
       <TodoList />
     </div>
-  );
-};
+  )
+}
 
-export default TodoSection;
+export default TodoSection

@@ -1,17 +1,17 @@
-import { useDispatch } from "react-redux";
-import { motion } from "framer-motion";
-import { toggleTodo, removeTodo } from "../redux/actions";
-import { Todo } from "../redux/reducer";
-import { FaTrash } from "react-icons/fa";
+import { useDispatch } from "react-redux"
+import { motion } from "framer-motion"
+import { toggleTodo, removeTodo } from "../redux/actions"
+import { Todo } from "../redux/reducer"
+import { FaTrash } from "react-icons/fa"
 
 const TodoItem = ({
   todo,
   index,
 }: {
-  todo: Todo;
-  index: number;
+  todo: Todo
+  index: number
 }): JSX.Element => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   return (
     <motion.li
@@ -42,7 +42,7 @@ const TodoItem = ({
         </motion.button>
       </div>
     </motion.li>
-  );
-};
+  )
+}
 
-export default TodoItem;
+export default TodoItem
