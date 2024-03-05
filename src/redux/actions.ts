@@ -5,46 +5,46 @@ import {
   MARK_COMPLETED,
   MARK_INCOMPLETE,
   FILTER_TODOS,
-} from "./actionTypes"
+} from './action-types'
 
 export const addTodo = (
-  text: string
+  text: string,
 ): { type: string, payload: { text: string } } => ({
-  type: ADD_TODO,
-  payload: { text },
+  'type': ADD_TODO,
+  'payload': { text },
 })
 
 export const toggleTodo = (
-  id: number
+  id: number,
 ): { type: string, payload: { id: number } } => ({
-  type: TOGGLE_TODO,
-  payload: { id },
+  'type': TOGGLE_TODO,
+  'payload': { id },
 })
 
 export const removeTodo = (
-  id: number
+  id: number,
 ): { type: string, payload: { id: number } } => ({
-  type: REMOVE_TODO,
-  payload: { id },
+  'type': REMOVE_TODO,
+  'payload': { id },
 })
 
 export const markCompleted = (
-  id: number
+  id: number,
 ): { type: string, payload: { id: number } } => ({
-  type: MARK_COMPLETED,
-  payload: { id },
+  'type': MARK_COMPLETED,
+  'payload': { id },
 })
 
 export const markIncomplete = (
-  id: number
+  id: number,
 ): { type: string, payload: { id: number } } => ({
-  type: MARK_INCOMPLETE,
-  payload: { id },
+  'type': MARK_INCOMPLETE,
+  'payload': { id },
 })
 
 export const filterTodos = (
-  filter: string
+  filter: string,
 ): { type: string, payload: { filter: string } } => ({
-  type: FILTER_TODOS,
-  payload: { filter },
+  'type': FILTER_TODOS,
+  'payload': { filter },
 })

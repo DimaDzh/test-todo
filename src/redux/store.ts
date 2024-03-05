@@ -1,22 +1,20 @@
-import { createStore, Store } from "redux"
+import { createStore, Store } from 'redux'
 
-import todoReducer, { TodoState } from "./reducer"
-import { TodoAction } from "./actionTypes"
+import todoReducer, { TodoState } from './reducer'
+import { TodoAction } from './action-types'
 
 // Get the state from session storage, if it exists
-const savedState = sessionStorage.getItem("reduxState")
-const initialState: TodoState = savedState
-  ? JSON.parse(savedState)
-  : {
-    todos: [],
-    completedCount: 0,
-    incompleteCount: 0,
-    filter: "ALL",
-  }
+const savedState = sessionStorage.getItem('reduxState')
+const initialState: TodoState = savedState ? JSON.parse(savedState) : {
+  'todos': [],
+  'completedCount': 0,
+  'incompleteCount': 0,
+  'filter': 'ALL',
+}
 
 const store: Store<TodoState, TodoAction> = createStore(
   todoReducer,
-  initialState
+  initialState,
 )
 
 // Save store to session storage whenever it changes
@@ -25,7 +23,7 @@ store.subscribe(() => {
   const currentState = store.getState()
 
   // Save the state to session storage
-  sessionStorage.setItem("reduxState", JSON.stringify(currentState))
+  sessionStorage.setItem('reduxState', JSON.stringify(currentState))
 })
 
 export default store
