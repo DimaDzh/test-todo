@@ -1,20 +1,30 @@
 import { useSelector } from 'react-redux'
 import TodoItem from './todo-item'
-import { TodoState } from '../redux/reducer'
+import { Todo, TodoState } from '../redux/reducer'
 import React from 'react'
 
 const TodoList = (): React.JSX.Element => {
   const filteredTodos = useSelector((state: TodoState) => {
     const todos = state.todos
-    const filter = state.filter
 
-    return todos.filter(({ completed }) => {
-      return filter === 'COMPLETED' && completed ||
-        filter === 'INCOMPLETE' && !completed ||
-        filter === 'ALL'
-    })
+    const filterTodos = (filterString: string):Todo[] => {
+      return todos.filter(({ completed }) => {
+        switch (filterString) {
+          case 'COMPLETED': {
+            return completed
+          }
+          case 'INCOMPLETE': {
+            return !completed
+          }
+          default: {
+            return true
+          }
+        }
+      })
+    }
+
+    return filterTodos(state.filter)
   })
-
   return (
     <ul>
       {filteredTodos.length === 0 &&
@@ -23,7 +33,8 @@ const TodoList = (): React.JSX.Element => {
         </li>
       }
 
-      {filteredTodos.map((todo, index) => <TodoItem key={index} todo={todo} index={index} />)}
+      {filteredTodos
+        .map((todo, ind) => <TodoItem key={ind} todo={todo} index={ind} />)}
     </ul>
   )
 }

@@ -3,7 +3,6 @@ import { createStore, Store } from 'redux'
 import todoReducer, { TodoState } from './reducer'
 import { TodoAction } from './action-types'
 
-// Get the state from session storage, if it exists
 const savedState = sessionStorage.getItem('reduxState')
 const initialState: TodoState = savedState ? JSON.parse(savedState) : {
   'todos': [],
@@ -17,12 +16,9 @@ const store: Store<TodoState, TodoAction> = createStore(
   initialState,
 )
 
-// Save store to session storage whenever it changes
 store.subscribe(() => {
-  // Get the current state from the store
   const currentState = store.getState()
 
-  // Save the state to session storage
   sessionStorage.setItem('reduxState', JSON.stringify(currentState))
 })
 

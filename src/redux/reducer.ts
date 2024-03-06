@@ -61,7 +61,13 @@ const addTodoReducer = (state: TodoState, action: TodoAction): TodoState => {
 
 const toggleTodoReducer = (state: TodoState, action: TodoAction):TodoState => {
   const updatedTodos = state
-    .todos.map((todo, index) => index === action.payload.id ? { ...todo, 'completed': !todo.completed } : todo)
+    .todos
+    .map((todo, index) => {
+      if (index === action.payload.id) {
+        return { ...todo, 'completed': !todo.completed }
+      }
+      return todo
+    })
   const completedCount = updatedTodos.filter((todo) => todo.completed).length
   return {
     ...state,
@@ -75,9 +81,12 @@ const removeTodoReducer = (state: TodoState, action: TodoAction):TodoState => {
   const removedTodo = state.todos[action.payload.id]
   return {
     ...state,
-    'todos': state.todos.filter((___, index) => index !== action.payload.id),
-    'incompleteCount': removedTodo.completed ? state.incompleteCount : state.incompleteCount - 1,
-    'completedCount': removedTodo.completed ? state.completedCount - 1 : state.completedCount,
+    'todos': state.todos
+      .filter((___, index) => index !== action.payload.id),
+    'incompleteCount':
+     removedTodo.completed ? state.incompleteCount : state.incompleteCount - 1,
+    'completedCount':
+     removedTodo.completed ? state.completedCount - 1 : state.completedCount,
   }
 }
 
